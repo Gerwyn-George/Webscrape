@@ -1,15 +1,16 @@
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
+
  
 
 def Collect_Webpage(url):
-    page = urlopen(url)
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    page = urlopen(req)
     html = page.read().decode("utf-8")
 
-    for line in html:
-        print("hello")
-
     print(html)
+  
+print("Intialising")
+Collect_Webpage("https://www.tesco.com/groceries/en-GB/shop/fresh-food/fresh-fruit/bananas")
+  
 
 
-    
-Collect_Webpage("https://docs.python.org/3/library/urllib.parse.html#module-urllib.parse")
