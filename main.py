@@ -1,16 +1,36 @@
-from urllib.request import Request, urlopen
+import requests
+import re
 
- 
 
-def Collect_Webpage(url):
-    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    page = urlopen(req)
-    html = page.read().decode("utf-8")
 
-    print(html)
   
-print("Intialising")
-Collect_Webpage("https://www.tesco.com/groceries/en-GB/shop/fresh-food/fresh-fruit/bananas")
+
+headers ={ "user-agent": "mozilla/5.0"}
+res = requests.get("https://www.tesco.com/groceries/en-GB/shop/drinks/all", headers=headers)
+
+try:
+
+    for line in res:
+        print(line)
+    
+        x = re.findall("</html>",line)
+        if x:
+            print(x)
+        else:
+        pass 
+
+except:
+
+    print("Nevermind")
+
+
+
+
+    
+
+
+
+print(res.status_code)
   
 
 
