@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 #user agent must be specified if not the website will refuse connection. 
 
@@ -8,10 +9,26 @@ url = "https://www.tesco.com/groceries/en-GB/shop/fresh-food/all"
 
 response = requests.get(url,headers=user_agent)
 
+
 print(response)
 #print(response.content)
 
 page = BeautifulSoup(response.content, "html.parser")
 
+product = []
 for item in page.find_all(attrs={"data-auto":"product-tile--title"}):
-    print item
+    #print item.text
+    product.append(item.text)
+
+
+price = []
+for item in page.find_all(attrs={"data-auto":"price-value"}):
+    #print item.text
+    price.append(item.text)
+
+print price[0]
+print product[0]
+
+    
+
+
